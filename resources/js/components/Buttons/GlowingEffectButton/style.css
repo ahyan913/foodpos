@@ -1,0 +1,62 @@
+.glowing-effect-button{
+    --bg:#111;
+    --textColor: #f2f2f2;
+    background: var(--bg);
+    display:inline-block;
+    padding: 0.25rem;
+    position:relative;
+    border-radius: 10px;
+}
+
+.glowing-effect-button::before,
+.glowing-effect-button::after
+{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+
+    height: 100%;
+    width: 100%;
+    background: inherit;
+    border-radius: 10px;
+    content:'';
+}
+
+.glowing-effect-button button{
+    background:var(--bg);
+    color: var(--textColor);
+    outline: none;
+    border: none;
+    z-index: 9;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 0.25em 1.25em;
+    position: relative;
+}
+
+.glowing-effect-button:hover{
+    animation: hueRotate 1.5s linear infinite;
+    background:linear-gradient(#14ffe9, #ffeb3b,#ff00e0);
+}
+
+.glowing-effect-button:hover::before
+{
+    filter: blur(7px);
+}
+
+.glowing-effect-button:hover::after
+{
+    filter: blur(14px);
+}
+
+@keyframes hueRotate{
+    0%{
+        filter: hue-rotate(0deg);
+    }
+    100%{
+        filter: hue-rotate(360deg);
+    }
+}
