@@ -11,4 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Checkout repository  
-        run: 'pwd'
+        run: |
+          cd /var/www/foodpos.yanlui.com;
+          git checkout main;
+          git pull origin main;
+          composer install;
+          php artisan config:claer;
+          php artisan migrate;
+          php artisan optimize;
+          npm run build;
+
+
+        
+        
