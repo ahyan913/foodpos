@@ -9,6 +9,6 @@ class UrlHelper{
     }
 
     public static function adminUri(){
-        return env("ADMIN_URI");
+        return config("app.admin_uri");
     }
 }

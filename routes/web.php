@@ -27,7 +27,6 @@ use Illuminate\Http\Request;
 
 $uri = UrlHelper::adminUri();
 
-
 Route::get("/", [IndexController::class, "index"]);
 
 if(isset($_SERVER['REQUEST_URI']) && !empty($_SERVER['REQUEST_URI'])){

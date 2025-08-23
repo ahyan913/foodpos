@@ -235,5 +235,5 @@ return [
         'QrCode'=>SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
 
     ],
-
+    'admin_uri'=>env("ADMIN_URI", "administrator");
 ];
