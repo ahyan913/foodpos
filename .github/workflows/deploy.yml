@@ -1,33 +1,31 @@
-name: Deploy to Production
+name: Deploy
 
 on:
   workflow_dispatch:
     inputs:
       deploy_staging:
-        description: 'Confirm to deploy?'
+        description: 'Confirm to deploy? (Type Yes to proceed)'
         required: true
         default: 'No'
-      
   push:
     branches:
       - main
+
 jobs:
   deploy:
-
-    if: github.ref == 'refs/heads/main'
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
 
+      # Only run this step if triggered manually
       - name: Confirm deploy
         id: confirm
-        if: inputs.deploy_staging == 'Yes'
-        run: 'echo Hello'
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy_staging == 'Yes'
+        run: echo "Deployment confirmed."
 
-
-
+      # Execute deployment commands if confirmed or if triggered by push
       - name: Deploy to Main 
-        if: steps.confirm.outcome == 'success'
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy_staging == 'Yes' || github.event_name == 'push'
         run: |
           cd /var/www/foodpos.yanlui.com;
           git checkout main;
@@ -38,7 +36,3 @@ jobs:
           php artisan optimize;
           npm ci;
           npm run build;
-
-
-        
-        
