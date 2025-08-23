@@ -33,6 +33,6 @@ jobs:
           composer install;
           php artisan config:clear;
           php artisan migrate;
-          php artisan optimize;
-          npm ci;
+          php artisan config:cache;
+          npm ci --force;
           npm run build;
