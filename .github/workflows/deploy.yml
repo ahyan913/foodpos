@@ -15,6 +15,10 @@ jobs:
   confirm: 
     if: github.ref == 'refs/heads/main'
     runs-on: self-hosted
+    steps: 
+      - name: Confirm deploy
+        if: inputs.deploy_staging == 'Yes'
+        run: 'echo Hello'
 
   deploy:
   
@@ -22,10 +26,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - name: Confirm deploy
-        if: inputs.deploy_staging == 'Yes'
-        run: 'echo Hello'
-
       - name: Deploy to Main 
         if: steps.build.outcome == 'success'
         run: |
