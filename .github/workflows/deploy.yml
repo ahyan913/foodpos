@@ -10,8 +10,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: self-hosted
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Deploy to Production Server
+      - uses: actions/checkout@v3
+      - name: Checkout repository  
         run: 'pwd'
