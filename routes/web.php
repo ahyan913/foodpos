@@ -48,7 +48,7 @@ Route::get("$uri/logout", [UserController::class, 'logout']);
 
 Route::get("/test/", [\App\Http\Controllers\TestController::class, 'execute']);
 //admin
-Route::group(["middleware"=>[CheckAdminSession::class], "prefix"=>"/".$uri,"as"=>"admin"], function(){
+Route::group(["middleware"=>[CheckAdminSession::class], "prefix"=>"/".$uri], function(){
 
     if(!function_exists("setBasicCRUDRoute")){
         function setBasicCRUDRoute($path, $controllerClass, $modelClass){

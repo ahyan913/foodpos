@@ -12,6 +12,10 @@ on:
     branches:
       - main
 jobs:
+  confirm: 
+    if: github.ref == 'refs/heads/main'
+    runs-on: self-hosted
+
   deploy:
   
     if: github.ref == 'refs/heads/main'
@@ -23,6 +27,7 @@ jobs:
         run: 'echo Hello'
 
       - name: Deploy to Main 
+        if: steps.build.outcome == 'success'
         run: |
           cd /var/www/foodpos.yanlui.com;
           git checkout main;
@@ -31,6 +36,7 @@ jobs:
           php artisan config:clear;
           php artisan migrate;
           php artisan optimize;
+          npm ci;
           npm run build;
 
 
